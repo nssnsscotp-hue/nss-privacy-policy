@@ -1,135 +1,1984 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Account Deletion - NSS Units 36 & 94 NSSCOTP</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#f4f7fb;
-    margin:0;
-    padding:40px;
-    color:#333;
-    line-height:1.7;
-}
-.container{
-    max-width:900px;
-    margin:auto;
-    background:#fff;
-    padding:35px;
-    border-radius:12px;
-    box-shadow:0 5px 20px rgba(0,0,0,.1);
-}
-h1{
-    color:#0b5ed7;
-}
-h2{
-    color:#0b5ed7;
-    margin-top:30px;
-}
-.footer{
-    margin-top:40px;
-    border-top:1px solid #ddd;
-    padding-top:20px;
-    font-size:14px;
-}
-code{
-    background:#eee;
-    padding:2px 6px;
-    border-radius:4px;
-}
-</style>
+    <title>Account Deletion | NSS Units 36 & 94 NSSCOTP</title>
+
+    <meta name="description"
+          content="Request permanent deletion of your NSS Units 36 & 94 NSSCOTP account and associated personal data.">
+
+    <meta name="theme-color" content="#050816">
+
+    <style>
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            background: #050816;
+            color: #e8eeff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        button,
+        input,
+        textarea {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        ::selection {
+            background: rgba(0, 212, 255, .3);
+            color: white;
+        }
+
+
+        /* =========================================================
+           BACKGROUND
+        ========================================================= */
+
+        .background {
+            position: fixed;
+            inset: 0;
+            z-index: -10;
+            overflow: hidden;
+            background:
+                radial-gradient(
+                    circle at 50% 0%,
+                    rgba(35, 76, 180, .25),
+                    transparent 35%
+                ),
+                #050816;
+        }
+
+        /* Futuristic grid */
+
+        .grid {
+            position: absolute;
+            inset: -50%;
+            width: 200%;
+            height: 200%;
+
+            background-image:
+                linear-gradient(
+                    rgba(60, 155, 255, .055) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(60, 155, 255, .055) 1px,
+                    transparent 1px
+                );
+
+            background-size: 55px 55px;
+
+            transform:
+                perspective(700px)
+                rotateX(62deg)
+                translateY(-80px);
+
+            transform-origin: center top;
+
+            animation: gridMove 18s linear infinite;
+        }
+
+        @keyframes gridMove {
+            from {
+                transform:
+                    perspective(700px)
+                    rotateX(62deg)
+                    translateY(-80px);
+            }
+
+            to {
+                transform:
+                    perspective(700px)
+                    rotateX(62deg)
+                    translateY(55px);
+            }
+        }
+
+
+        /* Ambient glowing particles */
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(2px);
+            pointer-events: none;
+            opacity: .65;
+        }
+
+        .orb.one {
+            width: 420px;
+            height: 420px;
+            left: -160px;
+            top: 8%;
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(0, 210, 255, .23),
+                    transparent 68%
+                );
+            animation: floatOne 9s ease-in-out infinite;
+        }
+
+        .orb.two {
+            width: 500px;
+            height: 500px;
+            right: -220px;
+            top: 30%;
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(106, 76, 255, .24),
+                    transparent 68%
+                );
+            animation: floatTwo 11s ease-in-out infinite;
+        }
+
+        .orb.three {
+            width: 300px;
+            height: 300px;
+            left: 35%;
+            bottom: -120px;
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(0, 255, 191, .13),
+                    transparent 68%
+                );
+            animation: floatThree 13s ease-in-out infinite;
+        }
+
+        @keyframes floatOne {
+            0%, 100% {
+                transform: translate3d(0, 0, 0);
+            }
+
+            50% {
+                transform: translate3d(80px, 45px, 0);
+            }
+        }
+
+        @keyframes floatTwo {
+            0%, 100% {
+                transform: translate3d(0, 0, 0);
+            }
+
+            50% {
+                transform: translate3d(-70px, -50px, 0);
+            }
+        }
+
+        @keyframes floatThree {
+            0%, 100% {
+                transform: translate3d(0, 0, 0);
+            }
+
+            50% {
+                transform: translate3d(40px, -60px, 0);
+            }
+        }
+
+
+        /* Scanline */
+
+        .scanline {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 50;
+
+            background:
+                repeating-linear-gradient(
+                    to bottom,
+                    rgba(255,255,255,.012) 0,
+                    rgba(255,255,255,.012) 1px,
+                    transparent 1px,
+                    transparent 5px
+                );
+
+            mix-blend-mode: overlay;
+            opacity: .4;
+        }
+
+
+        /* =========================================================
+           NAVBAR
+        ========================================================= */
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+
+            height: 76px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 6vw;
+
+            background: rgba(5, 8, 22, .58);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+
+            border-bottom: 1px solid rgba(255,255,255,.07);
+
+            z-index: 100;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            font-weight: 800;
+            letter-spacing: .08em;
+            font-size: 15px;
+        }
+
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 11px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00d9ff,
+                    #5865ff
+                );
+
+            box-shadow:
+                0 0 30px rgba(0, 213, 255, .25);
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brand-icon::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 40%;
+
+            background: rgba(255,255,255,.35);
+            top: -50%;
+            left: 0;
+
+            transform: skewY(-20deg);
+
+            animation: shine 4s infinite;
+        }
+
+        @keyframes shine {
+            0%, 55% {
+                top: -60%;
+            }
+
+            75%, 100% {
+                top: 130%;
+            }
+        }
+
+        .nav-status {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+
+            font-size: 12px;
+            color: #8f9cba;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #00efb3;
+
+            box-shadow:
+                0 0 10px #00efb3;
+
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.5);
+                opacity: .55;
+            }
+        }
+
+
+        /* =========================================================
+           MAIN
+        ========================================================= */
+
+        main {
+            width: min(1180px, 92%);
+            margin: auto;
+            padding-top: 140px;
+            padding-bottom: 100px;
+        }
+
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .hero {
+            text-align: center;
+            max-width: 850px;
+            margin: 0 auto 70px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+
+            padding: 8px 15px;
+
+            border: 1px solid rgba(0, 218, 255, .2);
+            border-radius: 999px;
+
+            background: rgba(0, 200, 255, .055);
+
+            color: #78e8ff;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+            letter-spacing: .16em;
+
+            box-shadow:
+                inset 0 0 20px rgba(0, 211, 255, .025),
+                0 0 30px rgba(0, 211, 255, .04);
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+            background: #00e5ff;
+
+            box-shadow:
+                0 0 12px #00e5ff;
+        }
+
+        h1 {
+            margin-top: 25px;
+
+            font-size:
+                clamp(
+                    45px,
+                    7vw,
+                    88px
+                );
+
+            line-height: .98;
+
+            letter-spacing: -.055em;
+
+            font-weight: 900;
+
+            background:
+                linear-gradient(
+                    110deg,
+                    #ffffff 15%,
+                    #83ecff 45%,
+                    #8c7cff 80%
+                );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+
+            filter:
+                drop-shadow(
+                    0 0 30px rgba(0, 200, 255, .12)
+                );
+        }
+
+        .hero-description {
+            margin: 25px auto 0;
+
+            max-width: 670px;
+
+            color: #9ca9c7;
+
+            font-size: 17px;
+        }
+
+
+        /* =========================================================
+           GLASS CARDS
+        ========================================================= */
+
+        .glass {
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.075),
+                    rgba(255,255,255,.025)
+                );
+
+            border: 1px solid rgba(255,255,255,.09);
+
+            box-shadow:
+                0 30px 100px rgba(0,0,0,.35),
+                inset 0 1px 0 rgba(255,255,255,.07);
+
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+        }
+
+
+        /* =========================================================
+           CONTENT GRID
+        ========================================================= */
+
+        .layout {
+            display: grid;
+            grid-template-columns: 1.05fr .95fr;
+            gap: 25px;
+            align-items: start;
+        }
+
+
+        /* =========================================================
+           INFO CARD
+        ========================================================= */
+
+        .info-card {
+            border-radius: 28px;
+            padding: 38px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: "";
+            position: absolute;
+
+            width: 300px;
+            height: 300px;
+
+            right: -180px;
+            top: -180px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(0,216,255,.17),
+                    transparent 68%
+                );
+        }
+
+        .card-label {
+            color: #6fe9ff;
+
+            font-size: 11px;
+            font-weight: 800;
+
+            letter-spacing: .15em;
+            text-transform: uppercase;
+        }
+
+        .info-card h2 {
+            margin-top: 9px;
+
+            font-size: 31px;
+            letter-spacing: -.035em;
+        }
+
+        .info-card > p {
+            margin-top: 12px;
+            color: #8996b5;
+        }
+
+
+        /* Data list */
+
+        .data-list {
+            list-style: none;
+
+            display: grid;
+            gap: 11px;
+
+            margin-top: 28px;
+        }
+
+        .data-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+
+            padding: 14px;
+
+            border-radius: 15px;
+
+            background: rgba(255,255,255,.035);
+            border: 1px solid rgba(255,255,255,.055);
+
+            transition:
+                transform .25s ease,
+                border-color .25s ease,
+                background .25s ease;
+        }
+
+        .data-item:hover {
+            transform: translateX(6px);
+
+            background: rgba(0,205,255,.045);
+
+            border-color:
+                rgba(0,211,255,.2);
+        }
+
+        .data-icon {
+            width: 35px;
+            height: 35px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 10px;
+
+            background:
+                rgba(0, 204, 255, .08);
+
+            color: #6cecff;
+
+            flex-shrink: 0;
+        }
+
+        .data-item span:last-child {
+            font-size: 14px;
+            color: #bbc5dc;
+        }
+
+
+        /* Retention notice */
+
+        .retention {
+            margin-top: 30px;
+
+            padding: 18px;
+
+            border-radius: 17px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,183,77,.065),
+                    rgba(255,255,255,.02)
+                );
+
+            border:
+                1px solid
+                rgba(255,183,77,.12);
+        }
+
+        .retention-title {
+            display: flex;
+            gap: 9px;
+            align-items: center;
+
+            color: #ffd48a;
+
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .retention p {
+            margin-top: 7px;
+
+            color: #8f9ab4;
+            font-size: 13px;
+        }
+
+
+        /* =========================================================
+           FORM CARD
+        ========================================================= */
+
+        .form-card {
+            border-radius: 28px;
+            padding: 38px;
+
+            position: relative;
+
+            transform-style: preserve-3d;
+        }
+
+        .form-card h2 {
+            font-size: 28px;
+            letter-spacing: -.035em;
+        }
+
+        .form-subtitle {
+            color: #8996b5;
+            font-size: 14px;
+            margin-top: 5px;
+            margin-bottom: 25px;
+        }
+
+
+        /* Inputs */
+
+        .field {
+            margin-bottom: 18px;
+        }
+
+        .field label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #c5cee2;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            letter-spacing: .04em;
+        }
+
+        .field input,
+        .field textarea {
+            width: 100%;
+
+            border: 1px solid rgba(255,255,255,.09);
+
+            border-radius: 13px;
+
+            padding: 14px 15px;
+
+            background:
+                rgba(2,7,20,.55);
+
+            color: #f1f5ff;
+
+            outline: none;
+
+            transition:
+                border-color .25s ease,
+                box-shadow .25s ease,
+                background .25s ease;
+        }
+
+        .field textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .field input::placeholder,
+        .field textarea::placeholder {
+            color: #56617a;
+        }
+
+        .field input:focus,
+        .field textarea:focus {
+            border-color:
+                rgba(0,218,255,.55);
+
+            background:
+                rgba(0,190,255,.035);
+
+            box-shadow:
+                0 0 0 4px
+                rgba(0,211,255,.055),
+                0 0 30px
+                rgba(0,211,255,.06);
+        }
+
+
+        /* Confirmation */
+
+        .confirmation {
+            display: flex;
+            gap: 11px;
+            align-items: flex-start;
+
+            padding: 14px;
+
+            border-radius: 13px;
+
+            background:
+                rgba(255,255,255,.03);
+
+            border:
+                1px solid rgba(255,255,255,.06);
+
+            margin: 5px 0 20px;
+        }
+
+        .confirmation input {
+            margin-top: 4px;
+            accent-color: #00dfff;
+        }
+
+        .confirmation label {
+            font-size: 12px;
+            color: #8996b5;
+        }
+
+
+        /* Submit button */
+
+        .submit-btn {
+            width: 100%;
+
+            border: 0;
+
+            padding: 16px 20px;
+
+            border-radius: 14px;
+
+            color: white;
+
+            font-weight: 800;
+            font-size: 14px;
+
+            letter-spacing: .03em;
+
+            background:
+                linear-gradient(
+                    110deg,
+                    #008dff,
+                    #6c55ff,
+                    #00cfff
+                );
+
+            background-size: 200% 100%;
+
+            box-shadow:
+                0 12px 35px
+                rgba(0,130,255,.2);
+
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease,
+                background-position .4s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+
+            background-position: 100% 0;
+
+            box-shadow:
+                0 18px 45px
+                rgba(0,170,255,.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn.loading {
+            pointer-events: none;
+            opacity: .75;
+        }
+
+
+        /* Secure note */
+
+        .secure-note {
+            margin-top: 16px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 7px;
+
+            color: #68748f;
+
+            font-size: 11px;
+        }
+
+        .secure-note span {
+            color: #00e7b2;
+        }
+
+
+        /* =========================================================
+           STEPS
+        ========================================================= */
+
+        .steps {
+            margin-top: 25px;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 14px;
+        }
+
+        .step {
+            padding: 22px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(255,255,255,.035);
+
+            border:
+                1px solid rgba(255,255,255,.07);
+
+            transition:
+                transform .25s ease,
+                background .25s ease;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+
+            background:
+                rgba(255,255,255,.055);
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(0,214,255,.15),
+                    rgba(113,78,255,.15)
+                );
+
+            border:
+                1px solid rgba(0,211,255,.13);
+
+            color: #7cecff;
+
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .step h3 {
+            margin-top: 14px;
+            font-size: 15px;
+        }
+
+        .step p {
+            margin-top: 5px;
+            color: #77839e;
+            font-size: 12px;
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+            margin-top: 75px;
+
+            padding-top: 30px;
+
+            border-top:
+                1px solid rgba(255,255,255,.07);
+
+            text-align: center;
+        }
+
+        .footer-brand {
+            font-weight: 800;
+            letter-spacing: .1em;
+            font-size: 14px;
+        }
+
+        .footer-text {
+            margin-top: 8px;
+            color: #64708a;
+            font-size: 12px;
+        }
+
+        .footer-email {
+            display: inline-block;
+
+            margin-top: 8px;
+
+            color: #70e8ff;
+            text-decoration: none;
+
+            transition: color .2s ease;
+        }
+
+        .footer-email:hover {
+            color: white;
+        }
+
+
+        /* =========================================================
+           SUCCESS MODAL
+        ========================================================= */
+
+        .modal {
+            position: fixed;
+            inset: 0;
+
+            display: none;
+            align-items: center;
+            justify-content: center;
+
+            padding: 25px;
+
+            background:
+                rgba(0,0,0,.72);
+
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+            animation: fadeIn .25s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-box {
+            width: min(480px, 100%);
+
+            padding: 40px;
+
+            text-align: center;
+
+            border-radius: 27px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(20,29,55,.97),
+                    rgba(7,12,29,.98)
+                );
+
+            border:
+                1px solid rgba(0,222,255,.18);
+
+            box-shadow:
+                0 40px 100px rgba(0,0,0,.65),
+                0 0 70px rgba(0,210,255,.08);
+
+            animation:
+                modalUp .45s cubic-bezier(.2,.8,.2,1);
+        }
+
+        @keyframes modalUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .success-icon {
+            width: 70px;
+            height: 70px;
+
+            margin: auto;
+
+            display: grid;
+            place-items: center;
+
+            border-radius: 22px;
+
+            color: #00efb3;
+
+            font-size: 32px;
+
+            background:
+                rgba(0,239,179,.08);
+
+            border:
+                1px solid rgba(0,239,179,.18);
+
+            box-shadow:
+                0 0 40px rgba(0,239,179,.1);
+        }
+
+        .modal-box h2 {
+            margin-top: 20px;
+            font-size: 26px;
+        }
+
+        .modal-box p {
+            margin-top: 10px;
+            color: #8996b5;
+            font-size: 14px;
+        }
+
+        .close-modal {
+            margin-top: 25px;
+
+            padding: 12px 25px;
+
+            border-radius: 12px;
+
+            color: white;
+
+            background:
+                rgba(255,255,255,.07);
+
+            border:
+                1px solid rgba(255,255,255,.09);
+
+            transition: background .2s ease;
+        }
+
+        .close-modal:hover {
+            background:
+                rgba(255,255,255,.12);
+        }
+
+
+        /* =========================================================
+           SCROLL REVEAL
+        ========================================================= */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+
+            transition:
+                opacity .8s ease,
+                transform .8s cubic-bezier(.2,.8,.2,1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 900px) {
+
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .info-card,
+            .form-card {
+                padding: 28px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .nav-status {
+                display: none;
+            }
+
+            main {
+                width: 92%;
+                padding-top: 115px;
+            }
+
+            h1 {
+                font-size: 48px;
+            }
+
+            .hero-description {
+                font-size: 14px;
+            }
+
+            .info-card,
+            .form-card {
+                padding: 23px;
+                border-radius: 22px;
+            }
+
+            .info-card h2,
+            .form-card h2 {
+                font-size: 24px;
+            }
+        }
+
+    </style>
 </head>
+
 
 <body>
 
-<div class="container">
+    <!-- =========================================================
+         BACKGROUND
+    ========================================================= -->
 
-<h1>Account Deletion Request</h1>
+    <div class="background">
+        <div class="grid"></div>
 
-<p><strong>App:</strong> NSS Units 36 & 94 NSSCOTP</p>
+        <div class="orb one"></div>
+        <div class="orb two"></div>
+        <div class="orb three"></div>
+    </div>
 
-<p><strong>Developer:</strong> TATVANYX</p>
+    <div class="scanline"></div>
 
-<p>
-If you wish to permanently delete your account and associated personal data from the
-<strong>NSS Units 36 & 94 NSSCOTP</strong> application, you may request deletion using the method below.
-</p>
 
-<h2>How to Request Account Deletion</h2>
+    <!-- =========================================================
+         NAVBAR
+    ========================================================= -->
 
-<p>
-Send an email to:
-</p>
+    <nav class="navbar">
 
-<p>
-<strong>nssnsscotp@gmail.com</strong>
-</p>
+        <div class="brand">
 
-<p>
-Use the following subject:
-</p>
+            <div class="brand-icon">
+                ✦
+            </div>
 
-<code>Account Deletion Request</code>
+            <span>NSSCOTP</span>
 
-<p>
-Please include the following information:
-</p>
+        </div>
 
-<ul>
-<li>Your Full Name</li>
-<li>Your Registered Username</li>
-<li>Your Registered Email Address</li>
-<li>Reason for deletion (optional)</li>
-</ul>
 
-<h2>What Happens After Your Request</h2>
+        <div class="nav-status">
 
-<p>
-After verifying your request, we will process your account deletion within
-<strong>7 working days</strong>.
-</p>
+            <span class="status-dot"></span>
 
-<h2>Data That Will Be Deleted</h2>
+            Account Security Portal
 
-<ul>
-<li>Volunteer account information</li>
-<li>Username</li>
-<li>Email address</li>
-<li>Blood bank information (if applicable)</li>
-<li>Uploaded files and photos associated with your account, where applicable</li>
-</ul>
+        </div>
 
-<h2>Data That May Be Retained</h2>
+    </nav>
 
-<p>
-Certain records may be retained when necessary for legitimate administrative purposes, including:
-</p>
 
-<ul>
-<li>Attendance records</li>
-<li>Participation records</li>
-<li>Program reports</li>
-<li>Information required by law or institutional policy</li>
-</ul>
+    <!-- =========================================================
+         MAIN
+    ========================================================= -->
 
-<p>
-Retained information is kept only for legitimate administrative purposes and is not used for marketing.
-</p>
+    <main>
 
-<div class="footer">
+        <!-- HERO -->
 
-<strong>Developer</strong><br>
-TATVANYX<br><br>
+        <section class="hero reveal">
 
-<strong>Support Email</strong><br>
-nssnsscotp@gmail.com
+            <div class="eyebrow">
+                Privacy & Account Control
+            </div>
 
-</div>
+            <h1>
+                Account<br>
+                Deletion
+            </h1>
 
-</div>
+            <p class="hero-description">
+                You are always in control of your account.
+                Submit a secure deletion request to permanently
+                remove your account and associated personal information.
+            </p>
+
+        </section>
+
+
+        <!-- MAIN CONTENT -->
+
+        <section class="layout">
+
+
+            <!-- =================================================
+                 LEFT INFORMATION
+            ================================================== -->
+
+            <div class="glass info-card reveal">
+
+                <span class="card-label">
+                    Data Management
+                </span>
+
+                <h2>
+                    What happens to your data?
+                </h2>
+
+                <p>
+                    Once your request has been verified, eligible
+                    account information and associated personal data
+                    will be processed for deletion.
+                </p>
+
+
+                <ul class="data-list">
+
+                    <li class="data-item">
+
+                        <div class="data-icon">
+                            👤
+                        </div>
+
+                        <span>
+                            Volunteer account information
+                        </span>
+
+                    </li>
+
+
+                    <li class="data-item">
+
+                        <div class="data-icon">
+                            @
+                        </div>
+
+                        <span>
+                            Username and email address
+                        </span>
+
+                    </li>
+
+
+                    <li class="data-item">
+
+                        <div class="data-icon">
+                            🩸
+                        </div>
+
+                        <span>
+                            Blood bank information, if applicable
+                        </span>
+
+                    </li>
+
+
+                    <li class="data-item">
+
+                        <div class="data-icon">
+                            ◈
+                        </div>
+
+                        <span>
+                            Uploaded files and photos associated with your account
+                        </span>
+
+                    </li>
+
+                </ul>
+
+
+                <div class="retention">
+
+                    <div class="retention-title">
+
+                        <span>⚠</span>
+
+                        Some records may be retained
+
+                    </div>
+
+                    <p>
+                        Attendance records, participation records,
+                        programme reports, and information required
+                        by law or institutional policy may be retained
+                        for legitimate administrative purposes.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 RIGHT FORM
+            ================================================== -->
+
+            <div
+                class="glass form-card reveal"
+                id="formCard"
+            >
+
+                <span class="card-label">
+                    Secure Request
+                </span>
+
+                <h2>
+                    Request deletion
+                </h2>
+
+                <p class="form-subtitle">
+                    Complete the form below to submit your request.
+                </p>
+
+
+                <form id="deletionForm">
+
+
+                    <!-- NAME -->
+
+                    <div class="field">
+
+                        <label for="fullName">
+                            FULL NAME
+                        </label>
+
+                        <input
+                            type="text"
+                            id="fullName"
+                            name="fullName"
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- USERNAME -->
+
+                    <div class="field">
+
+                        <label for="username">
+                            REGISTERED USERNAME
+                        </label>
+
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            placeholder="Enter your registered username"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="field">
+
+                        <label for="email">
+                            REGISTERED EMAIL ADDRESS
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="you@example.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- REASON -->
+
+                    <div class="field">
+
+                        <label for="reason">
+                            REASON
+                            <span style="color:#58637c">
+                                — OPTIONAL
+                            </span>
+                        </label>
+
+                        <textarea
+                            id="reason"
+                            name="reason"
+                            placeholder="Tell us why you want to delete your account..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <!-- CONFIRMATION -->
+
+                    <div class="confirmation">
+
+                        <input
+                            type="checkbox"
+                            id="confirm"
+                            required
+                        >
+
+                        <label for="confirm">
+                            I confirm that I am requesting deletion of
+                            my own account and understand that this action
+                            may permanently remove eligible account data.
+                        </label>
+
+                    </div>
+
+
+                    <!-- SUBMIT -->
+
+                    <button
+                        type="submit"
+                        class="submit-btn"
+                        id="submitButton"
+                    >
+                        Submit Deletion Request
+                    </button>
+
+
+                    <div class="secure-note">
+
+                        <span>●</span>
+
+                        Your request will be reviewed before processing.
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PROCESS
+        ================================================== -->
+
+        <section class="steps">
+
+            <div class="step reveal">
+
+                <div class="step-number">
+                    01
+                </div>
+
+                <h3>
+                    Submit
+                </h3>
+
+                <p>
+                    Provide your registered account information
+                    and send your deletion request.
+                </p>
+
+            </div>
+
+
+            <div class="step reveal">
+
+                <div class="step-number">
+                    02
+                </div>
+
+                <h3>
+                    Verify
+                </h3>
+
+                <p>
+                    Your request may be verified to protect
+                    your account from unauthorised deletion.
+                </p>
+
+            </div>
+
+
+            <div class="step reveal">
+
+                <div class="step-number">
+                    03
+                </div>
+
+                <h3>
+                    Process
+                </h3>
+
+                <p>
+                    After verification, eligible information
+                    will be processed according to the deletion policy.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <footer>
+
+            <div class="footer-brand">
+                TATVANYX
+            </div>
+
+            <div class="footer-text">
+                NSS Units 36 & 94 NSSCOTP
+            </div>
+
+            <a
+                class="footer-email"
+                href="mailto:nssnsscotp@gmail.com"
+            >
+                nssnsscotp@gmail.com
+            </a>
+
+            <div class="footer-text">
+                © <span id="year"></span> TATVANYX. All rights reserved.
+            </div>
+
+        </footer>
+
+    </main>
+
+
+
+    <!-- =========================================================
+         SUCCESS MODAL
+    ========================================================= -->
+
+    <div
+        class="modal"
+        id="successModal"
+        aria-hidden="true"
+    >
+
+        <div class="modal-box">
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <h2>
+                Request Received
+            </h2>
+
+            <p>
+                Your account deletion request has been prepared
+                successfully. Our team will verify the request
+                before processing the deletion.
+            </p>
+
+            <button
+                class="close-modal"
+                id="closeModal"
+            >
+                Close
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================= -->
+
+    <script>
+
+        /* =====================================================
+           YEAR
+        ===================================================== */
+
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
+
+
+
+        /* =====================================================
+           SCROLL REVEAL
+        ===================================================== */
+
+        const revealElements =
+            document.querySelectorAll(".reveal");
+
+        const observer =
+            new IntersectionObserver(
+                entries => {
+
+                    entries.forEach(entry => {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target.classList.add("visible");
+
+                            observer.unobserve(entry.target);
+
+                        }
+
+                    });
+
+                },
+                {
+                    threshold: .12
+                }
+            );
+
+
+        revealElements.forEach(element => {
+            observer.observe(element);
+        });
+
+
+
+        /* =====================================================
+           PARALLAX BACKGROUND
+        ===================================================== */
+
+        const grid =
+            document.querySelector(".grid");
+
+        const orbOne =
+            document.querySelector(".orb.one");
+
+        const orbTwo =
+            document.querySelector(".orb.two");
+
+
+        let mouseX = 0;
+        let mouseY = 0;
+
+        let currentX = 0;
+        let currentY = 0;
+
+
+        document.addEventListener(
+            "mousemove",
+            event => {
+
+                mouseX =
+                    (event.clientX / window.innerWidth - .5);
+
+                mouseY =
+                    (event.clientY / window.innerHeight - .5);
+
+            }
+        );
+
+
+        function animateParallax() {
+
+            currentX +=
+                (mouseX - currentX) * .035;
+
+            currentY +=
+                (mouseY - currentY) * .035;
+
+
+            if (grid) {
+
+                grid.style.marginLeft =
+                    `${currentX * 20}px`;
+
+                grid.style.marginTop =
+                    `${currentY * 20}px`;
+
+            }
+
+
+            if (orbOne) {
+
+                orbOne.style.transform =
+                    `translate3d(
+                        ${currentX * -35}px,
+                        ${currentY * -35}px,
+                        0
+                    )`;
+
+            }
+
+
+            if (orbTwo) {
+
+                orbTwo.style.transform =
+                    `translate3d(
+                        ${currentX * 45}px,
+                        ${currentY * 45}px,
+                        0
+                    )`;
+
+            }
+
+
+            requestAnimationFrame(animateParallax);
+        }
+
+
+        animateParallax();
+
+
+
+        /* =====================================================
+           CARD TILT EFFECT
+        ===================================================== */
+
+        const formCard =
+            document.getElementById("formCard");
+
+
+        if (
+            formCard &&
+            window.matchMedia("(pointer:fine)").matches
+        ) {
+
+            formCard.addEventListener(
+                "mousemove",
+                event => {
+
+                    const rect =
+                        formCard.getBoundingClientRect();
+
+                    const x =
+                        event.clientX - rect.left;
+
+                    const y =
+                        event.clientY - rect.top;
+
+                    const centerX =
+                        rect.width / 2;
+
+                    const centerY =
+                        rect.height / 2;
+
+                    const rotateY =
+                        ((x - centerX) / centerX) * 2.2;
+
+                    const rotateX =
+                        ((centerY - y) / centerY) * 2.2;
+
+
+                    formCard.style.transform =
+                        `
+                        perspective(1000px)
+                        rotateX(${rotateX}deg)
+                        rotateY(${rotateY}deg)
+                        translateY(-2px)
+                        `;
+                }
+            );
+
+
+            formCard.addEventListener(
+                "mouseleave",
+                () => {
+
+                    formCard.style.transform =
+                        "perspective(1000px) rotateX(0) rotateY(0)";
+
+                }
+            );
+
+        }
+
+
+
+        /* =====================================================
+           FORM
+        ===================================================== */
+
+        const form =
+            document.getElementById("deletionForm");
+
+        const button =
+            document.getElementById("submitButton");
+
+        const modal =
+            document.getElementById("successModal");
+
+        const closeModal =
+            document.getElementById("closeModal");
+
+
+        form.addEventListener(
+            "submit",
+            async event => {
+
+                event.preventDefault();
+
+
+                /* Loading state */
+
+                button.classList.add("loading");
+
+                button.innerHTML =
+                    "Processing Request <span>•••</span>";
+
+
+                /*
+                 * =================================================
+                 * IMPORTANT:
+                 *
+                 * Replace the simulation below with your real
+                 * backend/API request.
+                 *
+                 * Example:
+                 *
+                 * await fetch("/api/delete-account", {
+                 *     method: "POST",
+                 *     headers: {
+                 *         "Content-Type": "application/json"
+                 *     },
+                 *     body: JSON.stringify(
+                 *         Object.fromEntries(
+                 *             new FormData(form)
+                 *         )
+                 *     )
+                 * });
+                 *
+                 * =================================================
+                 */
+
+
+                await new Promise(
+                    resolve => setTimeout(resolve, 1200)
+                );
+
+
+                button.classList.remove("loading");
+
+                button.innerHTML =
+                    "Submit Deletion Request";
+
+
+                modal.classList.add("active");
+
+                modal.setAttribute(
+                    "aria-hidden",
+                    "false"
+                );
+
+
+                form.reset();
+
+            }
+        );
+
+
+
+        /* =====================================================
+           CLOSE MODAL
+        ===================================================== */
+
+        function hideModal() {
+
+            modal.classList.remove("active");
+
+            modal.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+        }
+
+
+        closeModal.addEventListener(
+            "click",
+            hideModal
+        );
+
+
+        modal.addEventListener(
+            "click",
+            event => {
+
+                if (
+                    event.target === modal
+                ) {
+                    hideModal();
+                }
+
+            }
+        );
+
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key === "Escape" &&
+                    modal.classList.contains("active")
+                ) {
+
+                    hideModal();
+
+                }
+
+            }
+        );
+
+    </script>
 
 </body>
 </html>
